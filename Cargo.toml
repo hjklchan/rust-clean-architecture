@@ -3,6 +3,9 @@ name = "clean-architecture"
 version = "0.1.0"
 edition = "2024"
 
+[workspace]
+members = ["core"]
+
 [dependencies]
 async-trait = "0.1.88"
 chrono = "0.4.41"
