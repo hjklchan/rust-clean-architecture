@@ -1,12 +1,9 @@
-use crate::{
-    application::member::{
-        ports::{
-            create_member_input_port::{CreateMemberInputData, CreateMemberInputPort},
-            create_member_output_port::{CreateMemberOutputData, CreateMemberOutputPort},
-        },
-        repositories::member_repository::MemberRepository,
+use crate::application::member::{
+    ports::{
+        create_member_input_port::{CreateMemberInputData, CreateMemberInputPort},
+        create_member_output_port::{CreateMemberOutputData, CreateMemberOutputPort},
     },
-    domain::member::Member,
+    repositories::member_repository::MemberRepository,
 };
 
 pub struct CreateMemberUseCase<R, OP>
