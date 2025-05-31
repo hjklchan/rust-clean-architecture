@@ -80,6 +80,10 @@ dependencies = [
 [[package]]
 name = "core"
 version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+]
 
 [[package]]
 name = "core-foundation-sys"
@@ -110,6 +114,10 @@ checksum = "f31827a206f56af32e590ba56d5d2d085f558508192593743f16b2306495269f"
 dependencies = [
  "cc",
 ]
+
+[[package]]
+name = "infrastucture"
+version = "0.1.0"
 
 [[package]]
 name = "js-sys"
