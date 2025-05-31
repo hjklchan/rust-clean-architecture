@@ -1,7 +1,7 @@
 use crate::domain::member::Member;
 
 #[async_trait::async_trait]
-pub trait MemberRepository {
+pub trait MemberRepository: Send + Sync {
     async fn create_member(&self, member: Member) -> u64;
     async fn soft_delete_member(&self, id: u64);
     async fn forced_delete_member(&self, id: u64);
