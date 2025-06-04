@@ -49,6 +49,87 @@ impl User {
 
 #[cfg(test)]
 mod tests {
-    // TODO
-    fn is_deleted_should_work() {}
+    use chrono::Utc;
+
+    use crate::entities::user::User;
+
+    #[test]
+    fn is_deleted_user_should_be_true() {
+        let now_utc = Utc::now();
+
+        let user = User {
+            id: Some(1),
+            username: "Lucas Chen".to_string(),
+            email: "lucaschen@wtf.com".to_string(),
+            hash_password: "hash_password".to_string(),
+            status: Default::default(),
+            gender: Default::default(),
+            created_at: now_utc,
+            updated_at: now_utc,
+            deleted_at: Some(now_utc),
+        };
+
+        assert_eq!(user.is_deleted(), true);
+    }
+
+    #[test]
+    fn is_deleted_user_should_be_false() {
+        let now_utc = Utc::now();
+
+        let user = User {
+            id: Some(1),
+            username: "Lucas Chen".to_string(),
+            email: "lucaschen@wtf.com".to_string(),
+            hash_password: "hash_password".to_string(),
+            status: Default::default(),
+            gender: Default::default(),
+            created_at: now_utc,
+            updated_at: now_utc,
+            deleted_at: None,
+        };
+
+        assert_eq!(user.is_deleted(), true);
+    }
+
+    #[test]
+    fn restore_user_should_work() {
+        let now_utc = Utc::now();
+
+        let mut user = User {
+            id: Some(1),
+            username: "Lucas Chen".to_string(),
+            email: "lucaschen@wtf.com".to_string(),
+            hash_password: "hash_password".to_string(),
+            status: Default::default(),
+            gender: Default::default(),
+            created_at: now_utc,
+            updated_at: now_utc,
+            deleted_at: Some(now_utc),
+        };
+
+        user.restore();
+
+        assert_eq!(user.is_deleted(), false);
+    }
+
+    #[test]
+    fn mark_deleted_should_work() {
+        let now_utc = Utc::now();
+
+        let mut user = User {
+            id: Some(1),
+            username: "Lucas Chen".to_string(),
+            email: "lucaschen@wtf.com".to_string(),
+            hash_password: "hash_password".to_string(),
+            status: Default::default(),
+            gender: Default::default(),
+            created_at: now_utc,
+            updated_at: now_utc,
+            deleted_at: Some(now_utc),
+        };
+
+        user.mark_deleted();
+
+        assert_eq!(user.is_deleted(), true);
+    }
 }
