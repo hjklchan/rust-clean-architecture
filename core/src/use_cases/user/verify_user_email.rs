@@ -10,3 +10,9 @@ impl<V: EmailValidator> VerifyUserEmail<V> {
         self.email_validator.is_valid_email(&email)
     }
 }
+
+pub enum VerifyUserEmailError {
+    DomainDoesNotExist,
+    AddressDoesNotExist,
+    // more validation errors...
+}
