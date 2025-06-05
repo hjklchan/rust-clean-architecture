@@ -12,6 +12,12 @@ where
     user_repo: R1,
 }
 
+impl<R1> CreateUserUseCase<R1> where R1: UserRepository {
+    pub fn new(user_repo: R1) -> Self {
+        Self { user_repo }
+    }
+}
+
 impl<R1> CreateUserUseCase<R1>
 where
     R1: UserRepository,
