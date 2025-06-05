@@ -20,7 +20,8 @@ where
         let user = self
             .user_repo
             .get_by_id(id)
-            .map_err(|err| GetUserByIdError::from(err))?;
+            .map_err(|err| GetUserByIdError::from(err))?
+            .ok_or(GetUserByIdError::UserNotFound)?;
 
         Ok(user)
     }
@@ -37,7 +38,6 @@ pub enum GetUserByIdError {
 impl From<UserRepositoryError> for GetUserByIdError {
     fn from(value: UserRepositoryError) -> Self {
         match value {
-            UserRepositoryError::UserNotFound => Self::UserNotFound,
             _ => Self::RepositoryError,
         }
     }
