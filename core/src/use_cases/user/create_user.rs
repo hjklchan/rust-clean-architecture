@@ -16,10 +16,11 @@ impl<R1> CreateUserUseCase<R1>
 where
     R1: UserRepository,
 {
-    pub fn execute(&self, user: User) -> Result<u64, CreateUserError> {
+    pub async fn execute(&self, user: User) -> Result<u64, CreateUserError> {
         if self
             .user_repo
             .check_if_email_is_in_use(&user.email)
+            .await
             .map_err(|err| CreateUserError::from(err))?
         {
             return Err(CreateUserError::EmailAlreadyInUse);
@@ -28,6 +29,7 @@ where
         let id = self
             .user_repo
             .save(user)
+            .await
             .map_err(|err| CreateUserError::from(err))?;
 
         Ok(id)

@@ -16,10 +16,11 @@ impl<R1> GetUserByIdUseCase<R1>
 where
     R1: UserRepository,
 {
-    pub fn execute(&self, id: u64) -> Result<User, GetUserByIdError> {
+    pub async fn execute(&self, id: u64) -> Result<User, GetUserByIdError> {
         let user = self
             .user_repo
             .get_by_id(id)
+            .await
             .map_err(|err| GetUserByIdError::from(err))?
             .ok_or(GetUserByIdError::UserNotFound)?;
 
