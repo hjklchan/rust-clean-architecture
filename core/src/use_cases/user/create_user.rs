@@ -41,8 +41,8 @@ pub enum CreateUserError {
     RepositoryError,
     #[error("The e-mail address has already been used")]
     EmailAlreadyInUse,
-    #[error("{}", UserRepositoryError::UserAlreadyExists)]
-    UserAlreadyExists,
+    // #[error("{}", UserRepositoryError::UserAlreadyExists)]
+    // UserAlreadyExists,
     #[error("The user doesn't exist")]
     UserNotFound,
 }
@@ -51,7 +51,6 @@ impl From<UserRepositoryError> for CreateUserError {
     fn from(value: UserRepositoryError) -> Self {
         match value {
             UserRepositoryError::DatasourceAccessError => CreateUserError::RepositoryError,
-            UserRepositoryError::UserAlreadyExists => CreateUserError::UserAlreadyExists,
         }
     }
 }
