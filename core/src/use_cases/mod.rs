@@ -1,2 +1,2 @@
-pub mod interfaces;
+pub mod gateways;
 pub mod user;

@@ -1,5 +1,5 @@
 use core::use_cases::{
-    interfaces::repositories::UserRepository,
+    gateways::repositories::UserRepository,
     user::create_user::{
         CreateUserUseCase,
         inout_data::{CreateUserInputData, CreateUserOutputData},

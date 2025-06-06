@@ -1,5 +1,5 @@
 use crate::{
-    entities::user::User, use_cases::interfaces::repositories::error::UserRepositoryError,
+    entities::user::User, use_cases::gateways::repositories::error::UserRepositoryError,
 };
 
 #[async_trait::async_trait]

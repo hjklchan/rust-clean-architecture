@@ -1,4 +1,4 @@
-use crate::use_cases::interfaces::validators::email_validator::EmailValidator;
+use crate::use_cases::gateways::validators::email_validator::EmailValidator;
 
 
 #[allow(unused)]

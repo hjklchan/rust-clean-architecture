@@ -2,7 +2,7 @@ use thiserror::Error;
 
 use crate::{
     entities::user::User,
-    use_cases::interfaces::repositories::{UserRepository, error::UserRepositoryError},
+    use_cases::gateways::repositories::{UserRepository, error::UserRepositoryError},
 };
 
 pub struct GetUserByIdUseCase<R1>

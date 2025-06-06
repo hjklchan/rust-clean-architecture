@@ -3,7 +3,7 @@ use thiserror::Error;
 
 use crate::{
     entities::user::{Status, User},
-    use_cases::interfaces::repositories::{UserRepository, error::UserRepositoryError},
+    use_cases::gateways::repositories::{UserRepository, error::UserRepositoryError},
 };
 
 pub struct CreateUserUseCase<'r, R1>
