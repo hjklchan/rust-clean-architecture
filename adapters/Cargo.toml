@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 async-trait = "0.1.88"
-core = { path = "../core"}
+internal_core = { path = "../internal_core"}
 thiserror = "2.0.12"

@@ -7,7 +7,7 @@ name = "adapters"
 version = "0.1.0"
 dependencies = [
  "async-trait",
- "core",
+ "internal_core",
  "thiserror",
 ]
 
@@ -79,15 +79,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "core"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "chrono",
- "thiserror",
-]
-
-[[package]]
 name = "core-foundation-sys"
 version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -115,6 +106,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f31827a206f56af32e590ba56d5d2d085f558508192593743f16b2306495269f"
 dependencies = [
  "cc",
+]
+
+[[package]]
+name = "internal_core"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "thiserror",
 ]
 
 [[package]]

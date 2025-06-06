@@ -1,4 +1,4 @@
-use core::{
+use internal_core::{
     entities::user::User,
     use_cases::gateways::repositories::{UserRepository, error::UserRepositoryError},
 };
