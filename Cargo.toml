@@ -1,0 +1,9 @@
+[package]
+name = "clean-architecture"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+members = ["domain", "application", "adapters", "infrastructure"]
+
+[dependencies]
