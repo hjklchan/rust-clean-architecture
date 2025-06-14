@@ -1,3 +1,4 @@
+use domain::repositories::user_repository::UserRepositoryError;
 use thiserror::Error;
 
 pub struct LoginInputData {
@@ -16,4 +17,14 @@ pub trait LoginUseCase {
 }
 
 #[derive(Debug, Error)]
-pub enum LoginUseCaseError {}
+pub enum LoginUseCaseError {
+    #[error(transparent)]
+    Repository(#[from] UserRepositoryError),
+
+    #[error("User not found.")]
+    UserNotFound,
+    #[error("Incorrect password.")]
+    IncorrectPassword,
+    #[error("{0}")]
+    JwtGenerateError(Box<dyn std::error::Error>),
+}
