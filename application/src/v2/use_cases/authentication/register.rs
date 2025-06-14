@@ -1,3 +1,6 @@
+use std::error::Error;
+
+use domain::repositories::user_repository::UserRepositoryError;
 use thiserror::Error;
 
 pub struct RegisterInputData {
@@ -17,4 +20,12 @@ pub trait RegisterUseCase {
 }
 
 #[derive(Debug, Error)]
-pub enum RegisterUseCaseError {}
+pub enum RegisterUseCaseError {
+    #[error(transparent)]
+    Repository(#[from] UserRepositoryError),
+
+    #[error("{0}")]
+    SendWelcomeEmailError(Box<dyn Error>),
+    #[error("{0}")]
+    JwtGenerateError(Box<dyn Error>),
+}
