@@ -14,6 +14,12 @@ impl UserId {
     }
 }
 
+impl AsRef<Uuid> for UserId {
+    fn as_ref(&self) -> &Uuid {
+        &self.0
+    }
+}
+
 impl Display for UserId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
