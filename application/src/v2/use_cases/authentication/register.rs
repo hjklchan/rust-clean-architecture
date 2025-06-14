@@ -28,4 +28,6 @@ pub enum RegisterUseCaseError {
     SendWelcomeEmailError(Box<dyn Error>),
     #[error("{0}")]
     JwtGenerateError(Box<dyn Error>),
+    #[error("An error occurred while encrypting the user password.")]
+    EncryptPasswordError,
 }

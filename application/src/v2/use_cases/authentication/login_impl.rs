@@ -1,27 +1,32 @@
 use domain::repositories::user_repository::UserRepository;
-use uuid::Uuid;
 
 use crate::{
-    gateways::authentication::jwt_token_generator::JwtTokenGenerator,
+    gateways::{
+        authentication::jwt_token_generator::JwtTokenGenerator,
+        passwords::password_hasher::PasswordHasher,
+    },
     v2::use_cases::authentication::login::{
         LoginInputData, LoginOutputData, LoginUseCase, LoginUseCaseError,
     },
 };
 
-pub struct LoginUseCaseImpl<R, S1>
+pub struct LoginUseCaseImpl<R, S1, S2>
 where
     R: UserRepository,
     S1: JwtTokenGenerator,
+    S2: PasswordHasher,
 {
     user_repo: R,
     jwt_token_generator: S1,
+    password_hasher: S2,
 }
 
 #[async_trait::async_trait]
-impl<R, S1> LoginUseCase for LoginUseCaseImpl<R, S1>
+impl<R, S1, S2> LoginUseCase for LoginUseCaseImpl<R, S1, S2>
 where
     R: UserRepository,
     S1: JwtTokenGenerator,
+    S2: PasswordHasher,
 {
     async fn execute(&self, input: LoginInputData) -> Result<LoginOutputData, LoginUseCaseError> {
         // get user by email and password
@@ -33,7 +38,11 @@ where
 
         if let Some(user) = user {
             // verify the password
-            if user.password != input.password {
+            if !self
+                .password_hasher
+                .verify(&input.password, &user.password)
+                .map_err(|err| LoginUseCaseError::ParsePasswordError(err))?
+            {
                 return Err(LoginUseCaseError::IncorrectPassword);
             }
 

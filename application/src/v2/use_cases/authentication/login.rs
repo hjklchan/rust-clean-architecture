@@ -27,4 +27,6 @@ pub enum LoginUseCaseError {
     IncorrectPassword,
     #[error("{0}")]
     JwtGenerateError(Box<dyn std::error::Error>),
+    #[error("{0}")]
+    ParsePasswordError(Box<dyn std::error::Error>),
 }
