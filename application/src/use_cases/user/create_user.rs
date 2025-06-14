@@ -66,7 +66,7 @@ where
         }
 
         // save user here.
-        let new_id = self
+        let _new_id = self
             .user_repo
             .save(req.into())
             .await

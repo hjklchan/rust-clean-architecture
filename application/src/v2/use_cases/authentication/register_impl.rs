@@ -1,5 +1,3 @@
-use uuid::Uuid;
-
 use crate::{
     gateways::{
         authentication::jwt_token_generator::JwtTokenGenerator,
