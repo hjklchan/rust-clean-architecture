@@ -1,11 +1,12 @@
 use std::sync::Arc;
 
 use domain::{
-    entities::user::User,
     repositories::user_repository::{UserRepository, UserRepositoryError},
+    v2::user::User,
 };
+use uuid::Uuid;
 
-use crate::gateways::validations::email_validator::{self, EmailValidator};
+use crate::gateways::validations::email_validator::EmailValidator;
 
 #[derive(Debug)]
 pub struct CreateUserInputData {
@@ -18,9 +19,9 @@ pub struct CreateUserInputData {
 impl From<CreateUserInputData> for User {
     fn from(value: CreateUserInputData) -> Self {
         Self::new(
+            Uuid::new_v4().into(),
             value.username,
             value.email,
-            value.avatar_url,
             value.password_hash,
         )
     }
@@ -71,7 +72,7 @@ where
             .await
             .map_err(|err| CreateUserUseCaseError::Repository(err.into()))?;
 
-        Ok(CreateUserResponse { new_id })
+        Ok(CreateUserResponse { new_id: 0 })
     }
 }
 

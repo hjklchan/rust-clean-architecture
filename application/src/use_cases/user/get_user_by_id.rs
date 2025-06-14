@@ -40,7 +40,9 @@ pub struct GetUserByIdUseCase<R: UserRepository> {
 }
 
 impl<R> GetUserByIdUseCase<R>
-where R: UserRepository {
+where
+    R: UserRepository,
+{
     pub fn new(user_repo: Arc<R>) -> Self {
         Self { user_repo }
     }
@@ -51,22 +53,14 @@ where
     R: UserRepository,
 {
     pub async fn execute(&self, id: u64) -> Result<GetUserOutputData, GetUserByIdUseCaseError> {
-        let user = self
+        let _user = self
             .user_repo
             .get_by_id(id)
             .await
             .map_err(|err| GetUserByIdUseCaseError::Repository(err.into()))?
             .ok_or(GetUserByIdUseCaseError::UserNotFound)?;
 
-        Ok(GetUserOutputData {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            avatar_url: user.avatar_url,
-            status: user.status.into(),
-            created_at: user.created_at,
-            updated_at: user.updated_at,
-        })
+        todo!()
     }
 }
 
